@@ -2,6 +2,8 @@
 E_PARAM_ERR=98
 E_ASSERT_FAILED=99
 
+source "${BASH_SOURCE%/*}/colors.bash"
+
 ## Assert if the condition is false
 function assert()
 {
@@ -15,7 +17,7 @@ function assert()
 
   if [ ! $1 ]
   then
-  	echo 	"Assertion failed:  \"$1\""
+  	echo 	"Assertion ${COLOR_RED}FAILED${COLOR_NONE}:  \"$1\""
     echo 	"File \"$0\", line ${__lineno}"
     exit 	${E_ASSERT_FAILED}
   fi
@@ -53,4 +55,19 @@ function assert_ne()
 	assert "! $1 -eq $2" $3
 }
 
+## Assert for string equality
+function assert_streq()
+{
+	if [ ! $# -eq 3 ]
+	then
+		echo "Not enough params provided!"
+		return ${E_PARAM_ERR}
+	fi
+
+	local __one="$1"
+	local __two="$2"
+	local __lineno="$3"
+
+	assert "$1 == $2" $3
+}
 

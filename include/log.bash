@@ -1,8 +1,6 @@
 ## Colors
-COLOR_RED="\e[41m"
-COLOR_GREEN="\e[32m"
-COLOR_YELLOW="\e[33m"
-COLOR_NORMAL="\e[0m"
+
+source "colors.bash"
 
 function LOG_BASE() {
 	local __level="$1"

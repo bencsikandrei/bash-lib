@@ -4,13 +4,10 @@ set -u
 
 source "../include/assert.bash"
 source "../include/log.bash"
+source "../include/test.bash"
 
 # Test show debug log when active
 function TestLogShouldPrintWhenDebugFlagOn() {
-	local __funcName=${FUNCNAME[0]}
-	local __file="/tmp/${__funcName}"
-
-	echo "Running ${__funcName}.."
 	DEBUG=on
 
 	local __lc=`LOGD "Log debug" | wc -l`
@@ -20,8 +17,6 @@ function TestLogShouldPrintWhenDebugFlagOn() {
 
 # Test show debug log when active
 function TestLogShouldNotPrintWhenDebugFlagOff() {
-	local __funcName=${FUNCNAME[0]}
-	echo "Running ${__funcName}.."
 	DEBUG=off
 
 	local __lc=`LOGD "Hello debug" | wc -l`
@@ -31,8 +26,6 @@ function TestLogShouldNotPrintWhenDebugFlagOff() {
 
 # Test loge shows ERR and the text
 function TestLogeShouldShowErr() {
-	local __funcName=${FUNCNAME[0]}
-	echo "Running ${__funcName}.."
 	local __myText="Hello"
 	local __hasErr=`LOGE "${__myText}" | grep ERR`
 	local __hasText=`LOGE "${__myText}" | grep "${__myText}"`
@@ -41,6 +34,8 @@ function TestLogeShouldShowErr() {
 }
 
 # Main
-TestLogShouldPrintWhenDebugFlagOn
-TestLogShouldNotPrintWhenDebugFlagOff
-TestLogeShouldShowErr
+runTest "TestLogShouldPrintWhenDebugFlagOn"
+runTest "TestLogShouldNotPrintWhenDebugFlagOff"
+runTest "TestLogeShouldShowErr"
+
+pass
