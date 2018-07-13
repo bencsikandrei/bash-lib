@@ -1,4 +1,5 @@
 ## Assertions
+
 E_PARAM_ERR=98
 E_ASSERT_FAILED=99
 
@@ -17,8 +18,9 @@ function assert()
 
   if [ ! $1 ]
   then
-  	echo 	"Assertion ${COLOR_RED}FAILED${COLOR_NONE}:  \"$1\""
+  	echo -e	"Assertion ${COLOR_RED}FAILED${COLOR_NORMAL}:  \"$1\""
     echo 	"File \"$0\", line ${__lineno}"
+	echo -e "[      ${COLOR_RED}NOK${COLOR_NORMAL} ]"
     exit 	${E_ASSERT_FAILED}
   fi
 }
@@ -69,5 +71,21 @@ function assert_streq()
 	local __lineno="$3"
 
 	assert "$1 == $2" $3
+}
+
+## Assert for string inequality
+function assert_strne()
+{
+	if [ ! $# -eq 3 ]
+	then
+		echo "Not enough params provided!"
+		return ${E_PARAM_ERR}
+	fi
+
+	local __one="$1"
+	local __two="$2"
+	local __lineno="$3"
+
+	assert "! $1 == $2" $3
 }
 

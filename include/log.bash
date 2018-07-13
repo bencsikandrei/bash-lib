@@ -1,6 +1,6 @@
 ## Colors
 
-source "colors.bash"
+source "${BASH_SOURCE%/*}/colors.bash"
 
 function LOG_BASE() {
 	local __level="$1"

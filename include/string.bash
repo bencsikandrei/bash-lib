@@ -10,6 +10,22 @@ function removeSuffix() {
 	echo "${__result}"
 }
 
+## Remove prefix from a string and return the result
 function removePrefix() {
-	echo ""
+	local __str="$1"
+	local __prefix="$2"
+
+	local __result=${__str#${__prefix}}
+
+	echo "${__result}"
+}
+
+function replaceAll() {
+	local __str="$1"
+	local __toReplace="$2"
+	local __with="$3"
+
+	local __result="${__str//${__toReplace}/${__with}}"
+
+	echo ${__result}
 }
