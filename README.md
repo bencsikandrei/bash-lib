@@ -49,6 +49,13 @@ To run a test:
 ```bash
 bash TestName.bash
 ```
+
+Also you can now use the test runner under the test folder:
+```bash
+./RUN_ALL_TESTS
+```
+Be careful to launch it in that test folder!
+
 Of course you can make them executable.
 In the future, there will be a test runner that takes care of all that.
 
