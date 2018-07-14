@@ -6,7 +6,7 @@ E_ASSERT_FAILED=99
 source "${BASH_SOURCE%/*}/colors.bash"
 
 ## Assert if the condition is false
-function assert()
+function ASSERT()
 {
   if [ -z $2 ]
   then
@@ -26,7 +26,7 @@ function assert()
 }
 
 ## Assert for equality
-function assert_eq()
+function ASSERT_EQ()
 {
 	if [ ! $# -eq 3 ]
 	then
@@ -38,11 +38,11 @@ function assert_eq()
 	local __two="$2"
 	local __lineno="$3"
 
-	assert "$1 -eq $2" $3
+	ASSERT "$1 -eq $2" $3
 }
 
 ## Assert for non equality
-function assert_ne()
+function ASSERT_NE()
 {
 	if [ ! $# -eq 3 ]
 	then
@@ -54,11 +54,11 @@ function assert_ne()
 	local __two="$2"
 	local __lineno="$3"
 
-	assert "! $1 -eq $2" $3
+	ASSERT "! $1 -eq $2" $3
 }
 
 ## Assert for string equality
-function assert_streq()
+function ASSERT_STREQ()
 {
 	if [ ! $# -eq 3 ]
 	then
@@ -70,11 +70,11 @@ function assert_streq()
 	local __two="$2"
 	local __lineno="$3"
 
-	assert "$1 == $2" $3
+	ASSERT "$1 == $2" $3
 }
 
 ## Assert for string inequality
-function assert_strne()
+function ASSERT_STRNE()
 {
 	if [ ! $# -eq 3 ]
 	then
@@ -86,6 +86,6 @@ function assert_strne()
 	local __two="$2"
 	local __lineno="$3"
 
-	assert "! $1 == $2" $3
+	ASSERT "! $1 == $2" $3
 }
 

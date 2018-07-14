@@ -3,12 +3,13 @@ source "${BASH_SOURCE%/*}/colors.bash"
 
 ## Run a specified test
 function runTest() {
-	local __tcName="$1"
+	local __tcName="$1";
+	shift 1;
 
 	echo "[ ======== ] "
 	echo -e "[ ${COLOR_GREEN}RUN${COLOR_NORMAL}      ] ${__tcName} .."
 
-	eval "${__tcName}"
+	eval "${__tcName} $@"
 
 	local __tcVerdict=$(echo $?)
 

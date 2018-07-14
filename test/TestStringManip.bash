@@ -11,36 +11,47 @@ source "../include/test.bash"
 function TestRemoveSuffixRemovesItWhenThere() {
 	local __result=$(removeSuffix "main.cpp" ".cpp")
 
-	assert_streq "${__result}" "main" 14
+	ASSERT_STREQ "${__result}" "main" 14
 }
 
 # Test when suffix not there, do nothing
 function TestRemoveSuffixDoesNothingWhenNotThere() {
 	local __result=$(removeSuffix "main.cpp" ".hpp")
 
-	assert_streq "${__result}" "main.cpp" 21
+	ASSERT_STREQ "${__result}" "main.cpp" 21
 }
 
 # Test when prefix is there, remove it
 function TestRemovePrefixRemovesPrefixWhenThere() {
 	local __result=$(removePrefix "main.cpp" "main")
 
-	assert_streq ".cpp" "${__result:-"_"}" 27
+	ASSERT_STREQ ".cpp" "${__result:-"_"}" 27
 }
 
 # Test when prefix isn't there, do nothing
 function TestRemovePrefixDoesNothingWhenNotThere() {
 	local __result=$(removePrefix "main.cpp" "hello")
 
-	assert_streq "main.cpp" "${__result:-"_"}" 27
+	ASSERT_STREQ "main.cpp" "${__result:-"_"}" 27
 }
 
+# Test all replacements are good when more than one occurence present
 function TestReplaceAllOccurencesInString() {
-	local __result=$(replaceAll "Hello, world" "Hello" "Bye")
+	local __result=$(replaceAll "Hello, world, Hello" "Hello" "Bye")
 
-	echo ${__result} | grep -w "Bye, world"
+	local __line=`echo ${__result} | grep -w "Bye, world, Bye"`
 
-	assert_eq "$?" "0" 43
+	ASSERT_EQ "$?" "0" 43
+}
+
+# Test that it does nothing when not in there
+function TestReplaceAllDoesNothingWhenNotThere() {
+	local __original="Hello, world!"
+	local __result=$(replaceAll "Hello, world" "Bye" "Bye")
+
+	local __line=$(echo ${__result} | grep -w "${__original}")
+
+	ASSERT_EQ "$?" "0" 43
 }
 
 ## Tests
@@ -48,9 +59,8 @@ runTest "TestRemoveSuffixRemovesItWhenThere"
 runTest "TestRemoveSuffixDoesNothingWhenNotThere"
 runTest "TestRemovePrefixRemovesPrefixWhenThere"
 runTest "TestRemovePrefixDoesNothingWhenNotThere"
-
 runTest "TestReplaceAllOccurencesInString"
+runTest "TestReplaceAllDoesNothingWhenNotThere"
 
-# assert_eq 0 1 35
 pass
 
