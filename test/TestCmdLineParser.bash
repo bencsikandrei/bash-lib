@@ -11,6 +11,8 @@ function TestParserWithTwoOptionsGoesThroughAll() {
 	SHORT_OPTS="vh";
 	LONG_OPTS="verbose,help";
 
+	VERBOSE=false
+
 	CASE1="
 	-v | --verbose )
 		echo 'setting verbose'
@@ -30,6 +32,8 @@ function TestParserWithTwoOptionsGoesThroughAll() {
 	parserOptions[cases]="${CASE1} ${CASE2}"
 
 	parseArgs
+
+	ASSERT_STREQ ${VERBOSE} "true" 36
 }
 
 # Simple test to check if parsing goes OK for one case
