@@ -1,4 +1,6 @@
-## Colors
+## Log
+if [ ! -z "${SOURCED_LOG_BASH+x}" ]; then return; fi
+SOURCED_LOG_BASH=true
 
 source "${BASH_SOURCE%/*}/colors.bash"
 

@@ -1,4 +1,6 @@
 ## Utility functions
+if [ ! -z "${SOURCED_UTIL_BASH+x}" ]; then return; fi
+SOURCED_UTIL_BASH=true
 
 ## This script should be sourced not executed
 function include_guard() {

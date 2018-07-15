@@ -1,4 +1,6 @@
 ## Assertions
+if [ ! -z "${SOURCED_ASSERT_BASH+x}" ]; then return; fi
+SOURCED_ASSERT_BASH=true
 
 E_PARAM_ERR=98
 E_ASSERT_FAILED=99

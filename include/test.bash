@@ -1,4 +1,7 @@
 ## Test utils
+if [ ! -z "${SOURCED_TEST_BASH+x}" ]; then return; fi
+SOURCED_TEST_BASH=true
+
 source "${BASH_SOURCE%/*}/colors.bash"
 
 ## Run a specified test

@@ -1,4 +1,6 @@
 ## String
+if [ ! -z "${SOURCED_STRINGS_BASH+x}" ]; then return; fi
+SOURCED_STRINGS_BASH=true
 
 ## Remove a suffix from a string and return the result
 function removeSuffix() {
