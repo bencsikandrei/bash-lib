@@ -10,8 +10,9 @@ function LOG_BASE() {
 	local __what="$3"
 	# Get time from date
     local __datestring=`date +'%Y-%m-%d %H:%M:%S'`
+	local __filename=`basename $0`
     # Expand escaped characters, wrap at 70 chars, indent wrapped lines
-    echo -e "${__datestring} [${__color}${__level}${COLOR_NORMAL}] ${__what}" | fold -w70 -s | sed '2~1s/^/  /'
+    echo -e "${__datestring} ${__filename}/ [${__color}${__level}${COLOR_NORMAL}] ${__what}" | fold -w70 -s | sed '2~1s/^/  /'
 }
 
 ## Log errors with DBG and green as a color

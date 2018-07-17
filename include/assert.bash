@@ -28,6 +28,22 @@ function ASSERT()
 }
 
 ## Assert for equality
+function ASSERT_OP()
+{
+	if [ ! $# -eq 3 ]
+	then
+		echo "Not enough params provided!"
+		return ${E_PARAM_ERR}
+	fi
+
+	local __one="$1"
+	local __two="$2"
+	local __lineno="$3"
+
+	ASSERT "$1 -eq $2" $3
+}
+
+## Assert for equality
 function ASSERT_EQ()
 {
 	if [ ! $# -eq 3 ]
@@ -41,6 +57,38 @@ function ASSERT_EQ()
 	local __lineno="$3"
 
 	ASSERT "$1 -eq $2" $3
+}
+
+## Assert for greater than
+function ASSERT_GT()
+{
+	if [ ! $# -eq 3 ]
+	then
+		echo "Not enough params provided!"
+		return ${E_PARAM_ERR}
+	fi
+
+	local __one="$1"
+	local __two="$2"
+	local __lineno="$3"
+
+	ASSERT "$1 -gt $2" $3
+}
+
+## Assert for equality
+function ASSERT_LT()
+{
+	if [ ! $# -eq 3 ]
+	then
+		echo "Not enough params provided!"
+		return ${E_PARAM_ERR}
+	fi
+
+	local __one="$1"
+	local __two="$2"
+	local __lineno="$3"
+
+	ASSERT "$1 -lt $2" $3
 }
 
 ## Assert for non equality
